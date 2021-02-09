@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0 minimum-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="apple-mobile-web-app-title" content="Domofon PWA"/>
+  <meta name="description" content="Domofon app"/>
+  <meta name="theme-color" content="#2F3BA2"/>
+  <link rel="apple-touch-icon" href="./icon-512x512.png">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <title>Domofon app</title>
+  <script>
+    const PATH = 'service-worker.js';
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(PATH)
+    }
+  </script>
+</head>
+<body>
+  <h1>.</h1>
+  <button class="open__button">
+    open
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

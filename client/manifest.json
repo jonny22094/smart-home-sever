@@ -1,0 +1,13 @@
+{
+  "name": "Domofon",
+  "short_name": "Domofon", 
+  "icons": [{ 
+    "src": "./assets/icon-512x512.png", 
+    "sizes": "512x512", 
+    "type": "image/png" 
+  }], 
+  "start_url": ".",
+  "theme_color": "#ffffff", 
+  "background_color": "#ffffff", 
+  "display": "standalone" 
+}
