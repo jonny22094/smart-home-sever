@@ -10,7 +10,8 @@ export default class Server {
   }
 
   config() {
-    this.app.use(express.static(`${__dirname}/../client`));
+    console.log(__dirname);
+    this.app.use(express.static(`${__dirname}/../../client`));
   }
 
   setup() {
