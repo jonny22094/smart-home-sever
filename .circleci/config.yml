@@ -82,7 +82,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
 
       - build_server:
           requires: 
