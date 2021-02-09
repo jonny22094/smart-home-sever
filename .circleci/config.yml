@@ -31,8 +31,7 @@ commands:
       - save_cache:
           name: 'Save npm Package Cache'
           paths:
-            - ~/.cache
-            - ~/.npm
+            - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
 jobs:
@@ -53,7 +52,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - restorecache
-      - run: npm ci
+      - run: npm install
       - savecache
       - run:
           name: 'Build bundle'
