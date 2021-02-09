@@ -19,7 +19,7 @@ export default class Server {
     this.config();
 
     this.app.listen(this.port, () => {
-      console.log(`Server started on ${this.port} port`)
+      console.log(`Server started on ${this.port} port`);
     });
   }
 }

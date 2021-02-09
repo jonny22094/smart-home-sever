@@ -6,4 +6,4 @@ export const simpleAuth = (req: Request, res: Response, next: Function) => {
   }
 
   res.sendStatus(401);
-}
+};

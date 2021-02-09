@@ -1,10 +1,9 @@
-import { Properties } from '../../types'
-import { hexToRgb } from '../../utils/hextToRgb'
+import { Properties } from '../../types';
+import { hexToRgb } from '../../utils/hextToRgb';
 
 type ColorSequence = { time: number; color: string }[];
 
-const timer = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
-let ledColor: ColorSequence | string = '#000000';
+const timer = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 let newSequence = true;
 let promise: Promise<void> = null;
 
@@ -23,7 +22,6 @@ const ticker = async (io: SocketIO.Server, sequence: ColorSequence) => {
 };
 
 export const color = async (io: SocketIO.Server, colorInHex: ColorSequence | string) => {
-  ledColor = colorInHex;
   newSequence = true;
 
   if (promise) {
@@ -37,6 +35,6 @@ export const color = async (io: SocketIO.Server, colorInHex: ColorSequence | str
   }
 };
 
-export default ({io, socket}: Properties) => {
+export default ({ io, socket }: Properties) => {
   socket.on('color', ({ color: colorInHex }: { color: string }) => color(io, colorInHex));
-}
+};

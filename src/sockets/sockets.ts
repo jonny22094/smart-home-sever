@@ -1,12 +1,12 @@
 import IO from 'socket.io';
 import requireDir from 'require-dir';
 const events: DefaultEvent[] = Object.values(requireDir('./events'));
-import { DefaultEvent } from '../types'
+import { DefaultEvent } from '../types';
 
 export default class Sockets {
   io: IO.Server;
   port = 8080;
-  users: { [key: string]: IO.Socket} = {};
+  users: { [key: string]: IO.Socket } = {};
 
   constructor() {
     this.setup();
@@ -18,14 +18,14 @@ export default class Sockets {
         next();
       }
 
-      console.log(('socket - authentication error'));
-    })
+      console.log('socket - authentication error');
+    });
   }
 
   setup() {
     this.io = IO(this.port);
 
-    console.log(`Sockets started on ${this.port} port`)
+    console.log(`Sockets started on ${this.port} port`);
 
     this.config();
     this.events();
@@ -35,12 +35,11 @@ export default class Sockets {
     this.io.on('connection', socket => {
       console.log(`socket - ${socket.id} connected`);
 
-      
       socket.once('disconnect', () => {
         delete this.users[socket.id];
-      })
+      });
 
-      events.map(({default: event}) => event({io: this.io, socket}));
+      events.map(({ default: event }) => event({ io: this.io, socket }));
     });
   }
 }

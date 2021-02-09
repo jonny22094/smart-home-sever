@@ -1,4 +1,4 @@
-import {Express} from 'express';
+import { Express } from 'express';
 import IO from 'socket.io';
 
 export interface Properties {
@@ -7,8 +7,8 @@ export interface Properties {
   socket?: IO.Socket;
 }
 
-export type EventSetup = (args: Properties) => void
+export type EventSetup = (args: Properties) => void;
 
 export interface DefaultEvent {
-  default: EventSetup
+  default: EventSetup;
 }

@@ -1,6 +1,6 @@
-import Server from './server'
-import Sockets from './sockets'
-import { routes } from './server/routes'
+import Server from './server';
+import Sockets from './sockets';
+import { routes } from './server/routes';
 
 const run = () => {
   const server = new Server();
@@ -8,8 +8,8 @@ const run = () => {
 
   routes({
     app: server.app,
-    io: sockets.io
-  })
-} 
+    io: sockets.io,
+  });
+};
 
 run();
