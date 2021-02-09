@@ -1,3 +1,4 @@
 export SERVER_IP=
 export IP=
 export USER=
+export TOKEN=
