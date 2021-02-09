@@ -16,7 +16,6 @@ commands:
           command: |
               echo 'export USER=${USERNAME}' >> $BASH_ENV
               echo 'export IP=${IP}' >> $BASH_ENV
-              echo 'export IP=${IP}' >> $BASH_ENV
               echo 'source $BASH_ENV' >> $HOME/.bashrc
   restorecache:
     description: 'Loads npm package cache'
