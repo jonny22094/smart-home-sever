@@ -16,6 +16,7 @@ export default class Sockets {
     this.io.use((socket, next) => {
       if (socket.handshake.query && socket.handshake.query.token === process.env.TOKEN) {
         next();
+        return;
       }
 
       console.log('socket - authentication error');
@@ -36,6 +37,7 @@ export default class Sockets {
       console.log(`socket - ${socket.id} connected`);
 
       socket.once('disconnect', () => {
+        console.log(`socket - ${socket.id} disconnected`);
         delete this.users[socket.id];
       });
 
