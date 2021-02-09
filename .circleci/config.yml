@@ -23,8 +23,8 @@ commands:
       - restore_cache:
           name: 'Restore npm Package Cache'
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package-lock.json" }}
+            - v2-dependencies-
   savecache:
     description: 'Saves npm packages to cache'
     steps:
@@ -32,7 +32,7 @@ commands:
           name: 'Save npm Package Cache'
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          key: v2-dependencies-{{ checksum "package-lock.json" }}
 
 jobs:
   checkout_code:
