@@ -14,7 +14,7 @@ export default class Sockets {
 
   config() {
     this.io.use((socket, next) => {
-      if (socket.handshake.query && socket.handshake.query.token === 'token') {
+      if (socket.handshake.query && socket.handshake.query.token === process.env.TOKEN) {
         next();
       }
 
