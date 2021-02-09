@@ -1,0 +1,95 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+
+executors:
+  node:
+    working_directory: ~/repo/server
+    docker:
+      - image: circleci/node:10.15.3
+
+commands:
+  set_env:
+    steps:
+      - run:
+          name: Set env variables
+          command: |
+              echo 'export USER=${USERNAME}' >> $BASH_ENV
+              echo 'export IP=${IP}' >> $BASH_ENV
+              echo 'export IP=${IP}' >> $BASH_ENV
+              echo 'source $BASH_ENV' >> $HOME/.bashrc
+  restorecache:
+    description: 'Loads npm package cache'
+    steps:
+      - restore_cache:
+          name: 'Restore npm Package Cache'
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+  savecache:
+    description: 'Saves npm packages to cache'
+    steps:
+      - save_cache:
+          name: 'Save npm Package Cache'
+          paths:
+            - ~/.cache
+            - ~/.npm
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+jobs:
+  checkout_code:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10.15.3
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./server
+            - ./client
+  build_server:
+    executor: node
+    steps:
+      - set_env
+      - attach_workspace:
+          at: ~/repo
+      - restorecache
+      - run: npm ci
+      - savecache
+      - run:
+          name: 'Build bundle'
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./server/dist
+  deploy:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: 'Deploy and run build'
+          command: |
+            sh deploy/upload_files.sh
+
+
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - checkout_code:
+          filters:
+            branches:
+              only:
+                - master
+
+      - build_server:
+          requires: 
+            - checkout_code
+
+      - deploy:
+          requires: 
+            - build_server
+
