@@ -1,8 +1,9 @@
+import { Server } from 'socket.io';
 import { Properties } from '../../types';
 const debounceDelay = 5000;
 let isOpen = false;
 
-export const open = (io: SocketIO.Server) => {
+export const open = (io: Server) => {
   if (!isOpen) {
     console.log('emit - open');
 

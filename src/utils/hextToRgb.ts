@@ -3,9 +3,7 @@ export const hexToRgb = (hex: string) => {
   let string = '';
 
   for (let i = 1; i <= 3; i++) {
-    string += parseInt(result[i], 16)
-      .toString()
-      .padStart(3, '0');
+    string += parseInt(result[i], 16).toString().padStart(3, '0');
   }
 
   return string;

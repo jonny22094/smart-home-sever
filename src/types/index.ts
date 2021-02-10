@@ -1,10 +1,10 @@
 import { Express } from 'express';
-import IO from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 export interface Properties {
   app?: Express;
-  io?: IO.Server;
-  socket?: IO.Socket;
+  io?: Server;
+  socket?: Socket;
 }
 
 export type EventSetup = (args: Properties) => void;

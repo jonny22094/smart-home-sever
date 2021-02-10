@@ -1,12 +1,12 @@
-import IO from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import requireDir from 'require-dir';
 const events: DefaultEvent[] = Object.values(requireDir('./events'));
 import { DefaultEvent } from '../types';
 
 export default class Sockets {
-  io: IO.Server;
+  io: Server;
   port = 8080;
-  users: { [key: string]: IO.Socket } = {};
+  users: { [key: string]: Socket } = {};
 
   constructor() {
     this.setup();
@@ -24,7 +24,11 @@ export default class Sockets {
   }
 
   setup() {
-    this.io = IO(this.port);
+    this.io = new Server(this.port, {
+      cors: {
+        origin: '*',
+      },
+    });
 
     console.log(`Sockets started on ${this.port} port`);
 
@@ -33,7 +37,7 @@ export default class Sockets {
   }
 
   events() {
-    this.io.on('connection', socket => {
+    this.io.on('connection', (socket: Socket) => {
       console.log(`socket - ${socket.id} connected`);
 
       socket.once('disconnect', () => {

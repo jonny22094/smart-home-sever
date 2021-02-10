@@ -1,13 +1,14 @@
+import { Server } from 'socket.io';
 import { Properties } from '../../types';
 import { hexToRgb } from '../../utils/hextToRgb';
 
 type ColorSequence = { time: number; color: string }[];
 
-const timer = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const timer = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 let newSequence = true;
 let promise: Promise<void> = null;
 
-const ticker = async (io: SocketIO.Server, sequence: ColorSequence) => {
+const ticker = async (io: Server, sequence: ColorSequence) => {
   let index = 0;
   newSequence = false;
 
@@ -21,7 +22,7 @@ const ticker = async (io: SocketIO.Server, sequence: ColorSequence) => {
   return;
 };
 
-export const color = async (io: SocketIO.Server, colorInHex: ColorSequence | string) => {
+export const color = async (io: Server, colorInHex: ColorSequence | string) => {
   newSequence = true;
 
   if (promise) {
