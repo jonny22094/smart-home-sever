@@ -25,6 +25,7 @@ export default class Sockets {
 
   setup() {
     this.io = new Server(this.port, {
+      allowEIO3: true,
       cors: {
         origin: '*',
       },
