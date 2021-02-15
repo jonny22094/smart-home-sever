@@ -1,7 +1,10 @@
+import { Server } from 'socket.io';
 import { Properties } from '../../types';
 import { hexToRgb } from '../../utils/hextToRgb';
 
-export const color = async (io: SocketIO.Server, colorInHex: string) => {
+export const color = async (io: Server, colorInHex: string) => {
+  console.log('emit - color');
+
   io.emit('color', hexToRgb(colorInHex));
 };
 
