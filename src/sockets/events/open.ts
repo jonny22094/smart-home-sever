@@ -5,10 +5,10 @@ let isOpen = false;
 
 export const open = (io: Server) => {
   if (!isOpen) {
+    isOpen = true;
     console.log('emit - open');
 
     io.emit('open', {});
-    isOpen = true;
 
     setInterval(() => {
       isOpen = false;
